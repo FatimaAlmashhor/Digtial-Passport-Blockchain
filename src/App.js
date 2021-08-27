@@ -51,7 +51,7 @@ function App() {
       <div className='row mt-5'>
         <div className='col-lg-3  col-sm-12'>
           <div className='visa-part card'>
-            <h2 className='h2'>VISA</h2>
+            <h3>VISA</h3>
           </div>
         </div>
         <div className='col-lg-6 col-sm-12 '>
@@ -67,7 +67,7 @@ function App() {
                 <p className='inline'>Surname :</p>
                 <p className='font-lighter ml-5 pl-5' >Almaliky</p>
               </h5>
-              <h5 className='my-4'>
+              <h5 className=''>
                 <p className='inline'>Fisrt  name :</p>
                 <p className='font-lighter ml-5  pl-4' >Ahmad</p>
               </h5>

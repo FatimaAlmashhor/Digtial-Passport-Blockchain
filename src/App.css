@@ -17,7 +17,12 @@ html , body{
   background-color: var(--main-light-gray);
   font-family: 'Fredoka One', cursive;
 }
-
+h4 , p{
+  font-size: 12px;
+}
+h3  , h2{
+  font-size: 18px;
+}
 .passport-page{
   padding : 0px 3%
 }
