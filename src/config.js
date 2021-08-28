@@ -1,125 +1,85 @@
-export const TODO_LIST_ADDRESS = '0x6De658f997a250bd03adc84140a72d24519764E7'
-
-export const TODO_LIST_ABI = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "tasks",
-    "outputs": [
-      {
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "name": "content",
-        "type": "string"
-      },
-      {
-        "name": "completed",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0x8d977672"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "taskCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xb6cb58a5"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor",
-    "signature": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "content",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "completed",
-        "type": "bool"
-      }
-    ],
-    "name": "TaskCreated",
-    "type": "event",
-    "signature": "0x05d0fb833127fc08168556d0e7ca9554fc3f6bc843b3b7d2bf1c35aea6bab660"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "completed",
-        "type": "bool"
-      }
-    ],
-    "name": "TaskCompleted",
-    "type": "event",
-    "signature": "0xe21fa966ca5cd02748c0752352d18c48165e61cb55b4c29cccf924b5a95fcff1"
-  },
+export const ADDRESS = '0x4b76CB2A4b0c38A185e9e78004f4fB6eBea251ac'
+export const ADMIN = '0x8c0199C5D6e4B22A1948358F1bf48dD095Ae5300'
+export const PASSPORT = [
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_content",
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_data",
         "type": "string"
       }
     ],
-    "name": "createTask",
+    "name": "createOrUpdatePassport",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x111002aa"
+    "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
+    "inputs": [],
+    "name": "getPassport",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
-        "name": "_id",
+        "internalType": "uint256",
+        "name": "index",
         "type": "uint256"
       }
     ],
-    "name": "toggleCompleted",
-    "outputs": [],
+    "name": "getHistoryRecord",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "incidentTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "data",
+        "type": "string"
+      }
+    ],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x455f5024"
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getHistoryRecordLength",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]
