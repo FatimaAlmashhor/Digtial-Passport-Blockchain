@@ -23,19 +23,28 @@ function App() {
         setmessage("An error occurred: " + err)
         console.error("An error occurred: " + err)
       }
-      else if (accounts.length === 0) setmessage("User is not logged in to MetaMask");
+      else if (accounts.length === 0) setmessage("User did not login in to MetaMask");
       else {
-        if (accounts[0] === ADMIN) {
-          setAdmin(true)
-        }
-        setmessage("User is logged in to MetaMask");
+        setmessage("User is Login in to MetaMask seccussefuly ");
         setaccount(accounts[0])
         setloginIncorrectly(true)
         const Passportservice = new web3.eth.Contract(PASSPORT, ADDRESS)
         setPassportServices(Passportservice)
+
+        if (accounts[0] === ADMIN) {
+          setAdmin(true);
+          let x = Passportservice.methods.getHistoryRecordLength().send({ from: accounts[0] });
+          console.log(x);
+          // for (let i = 0; i < Passportservice.methods.getHistoryRecordLength().send({ from: accounts[0] }); i++) {
+          //   console.log(Passportservice.methods.getHistoryRecord(parseInt(i).send({ from: accounts[0] })));
+          // }
+        }
+        else {
+          personPassport(Passportservice, accounts[0]);
+        }
+
         // Passportservice.methods.createOrUpdatePassport('0x27ED7331101eA4c4D57303E11989D81721AFb73B', "John Smith, 33 years, NY, USA").send({ from: accounts[0] });
-        let passport = Passportservice.methods.getPassport().send({ from: accounts[0] })
-        console.log(passport);
+
       }
       setloading(false);
 
@@ -51,8 +60,26 @@ function App() {
         this.setState({ loading: false })
       })
   }
-  const showAll = () => {
+  const createNewPassport = (address, name, age, gender, country) => {
+    try {
+      PassportServices.methods.createOrUpdatePassport(address, `${name}, ${age} years,${gender}, ${country}`).send({ from: account });
+      return true;
 
+    } catch (error) {
+      setmessage(error);
+      return false;
+    }
+  }
+  const personPassport = (Passportservice, account) => {
+    console.log('the function of the person passport');
+    // try {
+    let passport = Passportservice.methods.getPassport().send({ from: account }).then((data) => {
+      console.log(data);
+    })
+    console.log('the passport is ', passport);
+    // } catch (error) {
+    // setmessage(error);
+    // }
   }
 
   if (loading)
@@ -60,14 +87,16 @@ function App() {
       <h5>Loading ...</h5>
     )
   return (
-    <div>
-      {/* <Passport /> */}
+    <div className=' h-100 d-flex flex-column  justify-content-center my-5  align-items-center'>
       {
         message !== '' && !loginIncorrectly ?
-          <div>{message}</div>
+          <div>
+            <h3>{message}</h3>
+            <button className='btn'>Reload</button>
+          </div>
           :
           isAdmin ?
-            <Home PassportServices={PassportServices} account={account} />
+            <Home createNewPassport={createNewPassport} />
             :
             <Passport />
       }

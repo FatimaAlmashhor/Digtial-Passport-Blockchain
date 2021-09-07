@@ -3,32 +3,29 @@ import Create from './Create'
 import Search from './Search'
 function Home(props) {
 
-    const { PassportServices, account } = props;
+    const { createNewPassport } = props;
 
     const [isSearch, setisSearch] = useState(false);
     const [isCreate, setisCreate] = useState(false);
     const [msg, setMsg] = useState('');
     const [isSccess, setisSccess] = useState(false)
 
-    // React.useEffect(() => {
-    //     console.log('the contact from the Home ,', PassportServices);
-    // })
 
-    const createNewPassport = (address, name, age, gender, country) => {
-        try {
-            PassportServices.methods.createOrUpdatePassport(address, `${name}, ${age} years,${gender}, ${country}`).send({ from: account });
+
+    const emitcreateNewPassport = (address, name, age, gender, country) => {
+        let state = createNewPassport(address, name, age, gender, country);
+        setisSccess(state)
+        if (state) {
             setMsg('seccussfuly adding the passport');
-            setisSccess(true)
 
-        } catch (error) {
-            setMsg(error);
-            setisSccess(false)
         }
+        else {
+            setMsg('Creation Faild');
+        }
+
+
     }
-    const getAPassport = (address) => {
-        let passport = PassportServices.methods.getPassport(address).send({ from: account })
-        console.log(passport);
-    }
+
     return (
         <div className=' h-100 d-flex flex-column  justify-content-center my-5  align-items-center'>
             <div className='text-center mt-5 '>
@@ -52,12 +49,12 @@ function Home(props) {
             </div>
             {
                 isCreate &&
-                <Create onClickToCreate={createNewPassport} />
+                <Create onClickToCreate={emitcreateNewPassport} />
             }
             {
                 isSearch
                 &&
-                <Search onCLickToSearch={getAPassport} />
+                <Search />
             }{
                 isSccess &&
                 <p>{msg}</p>

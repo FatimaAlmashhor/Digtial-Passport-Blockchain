@@ -3,7 +3,7 @@ import Avatar from '../assets/Avatar'
 
 function Passport() {
     return (
-        <div className='passport-page '>
+        <div className='container'>
             <div className='row mt-5'>
                 <div className='col-lg-3  col-sm-12'>
                     <div className='visa-part card'>
